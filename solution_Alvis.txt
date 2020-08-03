@@ -1,0 +1,133 @@
+First fork the repo, then clone it:
+
+cd ~
+
+cd wdi
+
+git clone https://github.com/chewjta/command-line-murder-mystery.git
+
+To get started:
+
+cat instructions
+
+Step 1:
+The files have too much data to go through each and everyone of them, so start by matching ‘Clues’ string in /mystery/crimescene folder (because we always need CLUES to solve a mystery:
+
+$ grep "CLUE" crimescene
+
+Step 2:
+We are given 3 clues of the culprit.
+1. A blurry cctv footage of a tall male at least 6 ft tall.
+2.  Member of AAA, Delta SkyMiles, the local library, and the Museum of Bash History
+3. A woman named Annabel ran as soon as the shots were heard.
+
+We can see that the 3 clues are all ambiguous except the last one. We have a proper lead - look for ‘Annabel’s
+
+Step 3:
+We know that the people file in mystery contains the address of the suspects, so we can look in there, find their addresses and head down to interview them.
+
+cat people | grep Annabel
+
+We are then given 4 ‘Annabel’s and their addresses.
+
+Annabel Sun F   26  Hart Place, line 40
+Oluwasegun Annabel  M   37  Mattapan Street, line 173
+Annabel Church  F   38  Buckingham Place, line 179
+Annabel Fuglsang    M   40  Haley Street, line 176
+
+The lines are important because…
+
+$ head -n 173 streets/Mattapan_Street | tail -n 1 (remember to search in mystery folder)
+
+
+This is an example for finding info of the interview with Oluwasegun Annabel.
+
+We see line 173 is the interview number which we can use to search for the interview recording.
+
+Therefore to breakdown the above code, it prints out the first 173 lines of the interview and then print out the last 1 line of that which is line 173 the interview number!
+- SEE INTERVIEW #9437737
+
+We do the same for the next 3 Annabels.
+
+$ head -n 40 streets/Hart Place | tail -n 1 - Annabel Sun
+.
+.
+$ head -n 179 streets/Buckingham_Place | tail -n 1
+
+Ok so after reviewing all interviews, we found out that only Annabel Church’s one is useful.
+
+- SEE INTERVIEW #699607
+
+cd interviews
+
+Cat interview-699607
+
+CLUE 4: However, she reports seeing the car that fled the scene.  Describes it as a blue Honda, with a license plate that starts with "L337" and ends with "9
+
+Navigate back to mystery folders to access vehicles.
+
+When we look through the vehicles folders we see that we only need the first 5 lines of info.
+1. License Plate
+2. Car Make
+3. Color
+4. Height
+5. Weight
+
+Now we can finally use clue 1.
+
+Next look for male names, height of at least 6 ft, license plate with L337XX9 and last but not least driving a blue Honda.
+
+These leaves us with 3 names.
+1. Joe Germuska
+2. Jeremy Bowers
+3. Jacqui Maher
+
+Remember we still have a clue that is unused. i.e. the memberships!!
+
+Navigate to mystery/memberships folder and then run
+
+grep "Jeremy Bowers" *
+
+grep "Jacqui Maher” *
+
+grep "Joe “Germuska *
+
+It will list the memberships files that contain these 3 guys.
+
+We then see that only Jacqui and Jeremy have memberships in AAA, Delta SkyMiles, the local library, and the Museum of Bash History
+
+Almost there…
+
+Navigate back to mystery folder.
+
+
+
+grep “Jacqui “Maher” people
+
+Heads up, Jacqui is actually a female. Search is over.
+
+Head -n 224 streets/Andover_Road | tail -n 1
+
+
+
+grep "Jeremy Bowers" people
+
+head -n 284 streets/Dunstable_Road | tail -n 1
+
+cd interviews
+
+cat interview-9620713
+
+Home appears to be empty, no answer at the door.
+
+After questioning neighbors, appears that the occupant may have left for a trip recently.
+
+Considered a suspect until proven otherwise, but would have to eliminate other suspects to confirm
+
+
+The Killer is
+.
+.
+.
+
+Jeremy Bowers!!!
