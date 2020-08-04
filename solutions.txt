@@ -1,0 +1,14 @@
+Solutions
+- grep "CLUE" crimescene
+- grep "Annabel" people
+- head -n 173 streets/Mattapan_Street | tail -n 1
+- cat interviews/interview-9437737
+// This female Annabel is not the suspect
+- head -n 179 streets/Buckingham_Place | tail -n 1
+- cat interviews/interview-699607
+// Show information about vehicles
+- grep -A 5 "L337" vehicles
+//match with height,gender,car brand and color of car of the suspect
+-cat AAA Delta_SkyMiles library.txt Museum_of_Bash_History | grep -c "Joe Germuska"
+-cat AAA Delta_SkyMiles library.txt Museum_of_Bash_History | grep -c "Jeremy Bowers"
+// Jeremy Bowers matched 4 out of 4 memberships = murderer
